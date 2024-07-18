@@ -1,12 +1,16 @@
 'use client';
-import { ClipboardX, SearchX, StarOff } from 'lucide-react';
 import React from 'react';
-import { Button } from './ui/button';
 
 import { api } from '@/convex/_generated/api';
 import { useOrganization } from '@clerk/nextjs';
 import { useApiMutation } from '@/hooks/use-api-mutation';
+import { useQuery } from 'convex/react';
+import { cn } from '@/lib/utils';
+
+import { ClipboardX, Plus, SearchX, StarOff } from 'lucide-react';
 import { toast } from 'sonner';
+import { Button } from './ui/button';
+import BoardCard from './BoardCard';
 
 const EmptySearch = () => {
   return (
@@ -74,8 +78,72 @@ const EmptyBoards = () => {
   );
 };
 
+const NewBoardButton = ({
+  orgId,
+  disabled,
+}: {
+  orgId: string;
+  disabled?: boolean;
+}) => {
+  const { organization } = useOrganization();
+  const { mutate, pending } = useApiMutation(api.board.create);
+
+  const handleCreateBoard = () => {
+    if (!organization) return;
+
+    mutate({
+      orgId: organization.id,
+      title: 'Untitled',
+    })
+      .then((id) => {
+        toast.success('Board created');
+        // TODO: Redirect to board/${id}
+      })
+      .catch(() => {
+        toast.error('Failed to create board');
+      });
+  };
+
+  return (
+    <button
+      disabled={pending || disabled}
+      onClick={handleCreateBoard}
+      className={cn(
+        'col-span-1 aspect-[100/127] bg-primary rounded-lg hover:bg-yellow-600 flex flex-col items-center justify-center py-6',
+        (pending || disabled) &&
+          'opacity-75 hover:bg-primary cursor-not-allowed'
+      )}
+    >
+      <div />
+      <Plus className='h-12 w-12 text-white stroke-1' />
+      <p className='text-sm text-white font-light'>New board</p>
+    </button>
+  );
+};
+
 export default function BoardList({ orgId, query }: BoardListProps) {
-  const data = [];
+  const data = useQuery(api.boards.get, { orgId });
+
+  if (data === undefined) {
+    return (
+      <div>
+        <h2 className='text-3xl'>
+          {query.favorites ? 'Favorite boards' : 'Team boards'}
+        </h2>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-5 mt-8 pb-10'>
+          <NewBoardButton
+            orgId={orgId}
+            disabled
+          />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+        </div>
+      </div>
+    );
+  }
+
   if (!data?.length && query.search) {
     return <EmptySearch />;
   }
@@ -88,5 +156,28 @@ export default function BoardList({ orgId, query }: BoardListProps) {
     return <EmptyBoards />;
   }
 
-  return <div>{JSON.stringify(query)}</div>;
+  return (
+    <div>
+      <h2 className='text-3xl'>
+        {query.favorites ? 'Favorite boards' : 'Team boards'}
+      </h2>
+
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-5 mt-8 pb-10'>
+        <NewBoardButton orgId={orgId} />
+        {data?.map((board) => (
+          <BoardCard
+            key={board._id}
+            id={board._id}
+            title={board.title}
+            imageUrl={board.imageUrl}
+            authorId={board.authorId}
+            authorName={board.authorName}
+            createdAt={board._creationTime}
+            orgId={board.orgId}
+            isFavorite={false}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
