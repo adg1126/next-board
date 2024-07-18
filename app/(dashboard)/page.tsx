@@ -1,7 +1,21 @@
-import { Button } from '@/components/ui/button';
+'use client';
+import BoardList from '@/components/BoardList';
+import EmptyOrg from '@/components/EmptyOrg';
+import { useOrganization } from '@clerk/nextjs';
 
-export default function Dashboard() {
+export default function Dashboard({ searchParams }: DashboardPageProps) {
+  const { organization } = useOrganization();
+
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'></main>
+    <main className='flex-1 h-[calc(100%-80px)]'>
+      {!organization ? (
+        <EmptyOrg />
+      ) : (
+        <BoardList
+          orgId={organization.id}
+          query={searchParams}
+        />
+      )}
+    </main>
   );
 }

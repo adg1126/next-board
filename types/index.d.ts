@@ -16,3 +16,18 @@ declare interface TooltipProps {
   sideOffset?: number;
   alignOffset?: number;
 }
+
+declare interface DashboardPageProps {
+  searchParams: {
+    search?: string;
+    favorites?: string;
+  };
+}
+
+declare interface BoardListProps {
+  orgId: string;
+  query: {
+    search?: string;
+    favorites?: string;
+  };
+}
