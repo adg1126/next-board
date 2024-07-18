@@ -6,9 +6,12 @@ import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
 import { useAuth } from '@clerk/nextjs';
 
+import { BoardCardFooterProps, BoardCardProps } from '@/types';
+
 import { Button } from './ui/button';
-import { Star } from 'lucide-react';
+import { MoreHorizontal, Star } from 'lucide-react';
 import { Skeleton } from './ui/skeleton';
+import BoardCardDropdownMenu from './BoardCardDropdownMenu';
 
 const BoardCardFooter = ({
   isFavorite,
@@ -72,6 +75,15 @@ export default function BoardCard({
             className='object-fit'
           />
           <div className='opacity-0 group-hover:opacity-50 transition-opacity h-full w-full bg-black' />
+          <BoardCardDropdownMenu
+            id={id}
+            side='right'
+            title={title}
+          >
+            <button className='absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity px-3 py-2 outline-none'>
+              <MoreHorizontal className='text-white opacity-75 hover:opacity-100 transition-opacity' />
+            </button>
+          </BoardCardDropdownMenu>
         </div>
         <BoardCardFooter
           isFavorite={isFavorite}
