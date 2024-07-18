@@ -11,6 +11,7 @@ import { ClipboardX, Plus, SearchX, StarOff } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
 import BoardCard from './BoardCard';
+import { BoardListProps } from '@/types';
 
 const EmptySearch = () => {
   return (
@@ -174,7 +175,7 @@ export default function BoardList({ orgId, query }: BoardListProps) {
             authorName={board.authorName}
             createdAt={board._creationTime}
             orgId={board.orgId}
-            isFavorite={false}
+            isFavorite={board.isFavorite}
           />
         ))}
       </div>
