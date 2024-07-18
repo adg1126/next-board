@@ -1,3 +1,5 @@
+import { DropdownMenuContentProps } from '@radix-ui/react-dropdown-menu';
+
 declare interface ConvexClientProviderProps {
   children: React.ReactNode;
 }
@@ -50,4 +52,20 @@ declare interface BoardCardFooterProps {
   createdAtLabel: string;
   onClick: () => void;
   disabled: boolean;
+}
+
+declare interface CopyLinkButtonProps {
+  children: React.ReactNode;
+  side?: DropdownMenuContentProps['side'];
+  sideOffset?: DropdownMenuContentProps['sideOffset'];
+  id: string;
+  title: string;
+}
+
+declare interface ConfirmModalProps {
+  children: React.ReactNode;
+  onConfirm: () => void;
+  disabled?: boolean;
+  header: string;
+  description?: string;
 }
