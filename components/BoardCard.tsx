@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
 import { useAuth } from '@clerk/nextjs';
+import { useApiMutation } from '@/hooks/use-api-mutation';
+import { api } from '@/convex/_generated/api';
 
 import { BoardCardFooterProps, BoardCardProps } from '@/types';
 
@@ -12,6 +14,7 @@ import { Button } from './ui/button';
 import { MoreHorizontal, Star } from 'lucide-react';
 import { Skeleton } from './ui/skeleton';
 import BoardCardDropdownMenu from './BoardCardDropdownMenu';
+import { toast } from 'sonner';
 
 const BoardCardFooter = ({
   isFavorite,
@@ -21,6 +24,12 @@ const BoardCardFooter = ({
   onClick,
   disabled,
 }: BoardCardFooterProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onClick();
+  };
+
   return (
     <div className='relative bg-white p-3'>
       <p className='text-[13px] truncate max-w-[calc(100%-20px)]'>{title}</p>
@@ -29,7 +38,7 @@ const BoardCardFooter = ({
       </p>
       <Button
         disabled={disabled}
-        onClick={onClick}
+        onClick={handleClick}
         variant='ghost'
         className={cn(
           'opacity-0 group-hover:opacity-100 transition absolute top-3 right-3 text-muted-foreground hover:text-yellow-600',
@@ -58,11 +67,29 @@ export default function BoardCard({
   isFavorite,
 }: BoardCardProps) {
   const userId = useAuth();
+  const { mutate: setFavorite, pending: pendingFavorite } = useApiMutation(
+      api.board.favorite
+    ),
+    { mutate: setUnfavorite, pending: pendingUnfavorite } = useApiMutation(
+      api.board.unfavorite
+    );
 
   const authorLabel = userId.userId === authorId ? 'You' : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, {
     addSuffix: true,
   });
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      setUnfavorite({ id })
+        .then(() => toast.success('Removed board from favorites'))
+        .catch(() => toast.error('Failed to remove board from favorites'));
+    } else {
+      setFavorite({ id, orgId })
+        .then(() => toast.success('Added board to favorites'))
+        .catch(() => toast.error('Failed to add board to favorites'));
+    }
+  };
 
   return (
     <Link href={`/board/${id}`}>
@@ -90,8 +117,8 @@ export default function BoardCard({
           title={title}
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
-          onClick={() => {}}
-          disabled={false}
+          onClick={handleToggleFavorite}
+          disabled={pendingFavorite || pendingUnfavorite}
         />
       </div>
     </Link>
