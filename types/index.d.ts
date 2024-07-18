@@ -31,3 +31,23 @@ declare interface BoardListProps {
     favorites?: string;
   };
 }
+
+declare interface BoardCardProps {
+  id: string;
+  title: string;
+  authorName: string;
+  authorId: string;
+  createdAt: number;
+  imageUrl: string;
+  orgId: string;
+  isFavorite: boolean;
+}
+
+declare interface BoardCardFooterProps {
+  isFavorite: boolean;
+  title: string;
+  authorLabel: string;
+  createdAtLabel: string;
+  onClick: () => void;
+  disabled: boolean;
+}
