@@ -1,6 +1,12 @@
+'use client';
 import { ClipboardX, SearchX, StarOff } from 'lucide-react';
 import React from 'react';
 import { Button } from './ui/button';
+
+import { api } from '@/convex/_generated/api';
+import { useOrganization } from '@clerk/nextjs';
+import { useApiMutation } from '@/hooks/use-api-mutation';
+import { toast } from 'sonner';
 
 const EmptySearch = () => {
   return (
@@ -27,6 +33,25 @@ const EmptyFavorites = () => {
 };
 
 const EmptyBoards = () => {
+  const { organization } = useOrganization();
+  const { mutate, pending } = useApiMutation(api.board.create);
+
+  const handleCreateBoard = () => {
+    if (!organization) return;
+
+    mutate({
+      orgId: organization.id,
+      title: 'Untitled',
+    })
+      .then((id) => {
+        toast.success('Board created');
+        // TODO: Redirect to board/${id}
+      })
+      .catch(() => {
+        toast.error('Failed to create board');
+      });
+  };
+
   return (
     <div className='h-full flex flex-col items-center justify-center'>
       <ClipboardX className='w-[100px] h-[100px]' />
@@ -37,7 +62,13 @@ const EmptyBoards = () => {
         Start by creating your first organization
       </p>
       <div className='mt-6'>
-        <Button size='lg'>Create board</Button>
+        <Button
+          disabled={pending}
+          onClick={handleCreateBoard}
+          size='lg'
+        >
+          Create board
+        </Button>
       </div>
     </div>
   );

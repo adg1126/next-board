@@ -5,6 +5,8 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { ConvexClientProvider } from '@/providers/convex-client-provider';
 
+import { Toaster } from '@/components/ui/sonner';
+
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -28,7 +30,10 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ConvexClientProvider>
+          {children}
+          <Toaster />
+        </ConvexClientProvider>
       </body>
     </html>
   );
