@@ -13,6 +13,8 @@ import { Button } from './ui/button';
 import BoardCard from './BoardCard';
 import { BoardListProps } from '@/types';
 
+import { useRouter } from 'next/navigation';
+
 const EmptySearch = () => {
   return (
     <div className='h-full flex flex-col items-center justify-center'>
@@ -40,6 +42,7 @@ const EmptyFavorites = () => {
 const EmptyBoards = () => {
   const { organization } = useOrganization();
   const { mutate, pending } = useApiMutation(api.board.create);
+  const router = useRouter();
 
   const handleCreateBoard = () => {
     if (!organization) return;
@@ -50,7 +53,7 @@ const EmptyBoards = () => {
     })
       .then((id) => {
         toast.success('Board created');
-        // TODO: Redirect to board/${id}
+        router.push(`/board/${id}`);
       })
       .catch(() => {
         toast.error('Failed to create board');
@@ -88,6 +91,7 @@ const NewBoardButton = ({
 }) => {
   const { organization } = useOrganization();
   const { mutate, pending } = useApiMutation(api.board.create);
+  const router = useRouter();
 
   const handleCreateBoard = () => {
     if (!organization) return;
@@ -98,7 +102,7 @@ const NewBoardButton = ({
     })
       .then((id) => {
         toast.success('Board created');
-        // TODO: Redirect to board/${id}
+        router.push(`/board/${id}`);
       })
       .catch(() => {
         toast.error('Failed to create board');
