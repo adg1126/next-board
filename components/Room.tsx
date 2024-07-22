@@ -11,9 +11,7 @@ import { RoomProps } from '@/types';
 
 export default function Room({ children, roomId, fallback }: RoomProps) {
   return (
-    <LiveblocksProvider
-      publicApiKey={`${process.env.NEXT_PUBLIC_LIVEBLOCKS_API_KEY}`}
-    >
+    <LiveblocksProvider authEndpoint='/api/liveblocks-auth'>
       <RoomProvider
         id={roomId}
         initialPresence={{}}
