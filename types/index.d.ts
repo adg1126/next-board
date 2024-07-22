@@ -115,3 +115,7 @@ declare interface ToolbarProps {
   canUndo: boolean;
   canRedo: boolean;
 }
+
+declare interface CursorProps {
+  connectionId: number;
+}
