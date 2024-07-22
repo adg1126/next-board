@@ -69,3 +69,19 @@ declare interface ConfirmModalProps {
   header: string;
   description?: string;
 }
+
+declare interface BoardPageProps {
+  params: {
+    boardId: string;
+  };
+}
+
+declare interface CanvasProps {
+  boardId: string;
+}
+
+declare interface RoomProps {
+  children: ReactNode;
+  roomId: string;
+  fallback: NonNullable<ReactNode> | null;
+}
