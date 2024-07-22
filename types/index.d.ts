@@ -1,4 +1,6 @@
 import { DropdownMenuContentProps } from '@radix-ui/react-dropdown-menu';
+import { LucideIcon } from 'lucide-react';
+import { CanvasState } from './canvas';
 
 declare interface ConvexClientProviderProps {
   children: React.ReactNode;
@@ -84,4 +86,32 @@ declare interface RoomProps {
   children: ReactNode;
   roomId: string;
   fallback: NonNullable<ReactNode> | null;
+}
+
+declare interface InfoProps {
+  boardId: string;
+}
+
+declare interface UserAvatarProps {
+  src?: string;
+  name?: string;
+  fallback?: string;
+  borderColor?: string;
+}
+
+declare interface ToolbarButtonProps {
+  label: string;
+  icon: LucideIcon;
+  onClick: () => void;
+  isActive?: boolean;
+  isDisabled?: boolean;
+}
+
+declare interface ToolbarProps {
+  canvasState: CanvasState;
+  setCanvasState: (newState: CanvasState) => void;
+  undo: () => void;
+  redo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
 }
