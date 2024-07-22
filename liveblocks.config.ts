@@ -19,7 +19,7 @@ declare global {
       id?: string;
       info?: {
         name?: string;
-        pucture?: string;
+        picture?: string;
       };
     };
 
