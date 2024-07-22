@@ -18,7 +18,7 @@ import ConfirmModal from './modals/ConfirmModal';
 import { Button } from './ui/button';
 import { useBoardStore } from '@/zustand/boardStore';
 
-export default function BoardCardDropdownMenu({
+export default function BoardDropdownMenu({
   children,
   side,
   sideOffset,
