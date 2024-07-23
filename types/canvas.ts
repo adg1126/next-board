@@ -127,6 +127,13 @@ export interface RectangleProps {
   selectionColor?: string;
 }
 
+export interface EllipseProps {
+  id: string;
+  layer: EllipseLayer;
+  onPointerDown: (e: React.PointerEvent, id: string) => void;
+  selectionColor?: string;
+}
+
 export interface SelectionBoxProps {
   onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }
