@@ -7,6 +7,8 @@ import { ConvexClientProvider } from '@/providers/convex-client-provider';
 
 import { Toaster } from '@/components/ui/sonner';
 import { ModalProvider } from '@/providers/modal-provider';
+import { Suspense } from 'react';
+import Loading from '@/components/Loading';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -31,11 +33,13 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ConvexClientProvider>
-          <Toaster />
-          <ModalProvider />
-          {children}
-        </ConvexClientProvider>
+        <Suspense fallback={<Loading />}>
+          <ConvexClientProvider>
+            <Toaster />
+            <ModalProvider />
+            {children}
+          </ConvexClientProvider>
+        </Suspense>
       </body>
     </html>
   );
