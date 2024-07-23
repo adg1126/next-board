@@ -6,8 +6,12 @@ import { useMutation, useSelf } from '@liveblocks/react/suspense';
 
 import { Color, SelectionToolsProps } from '@/types/canvas';
 import { useSelectionBounds } from '@/hooks/use-selection-bounds';
+import { useDeleteLayers } from '@/hooks/use-delete-layers';
 
 import ColorPicker from './ColorPicker';
+import Hint from '../Hint';
+import { Button } from '../ui/button';
+import { Trash2 } from 'lucide-react';
 
 export const SelectionTools = memo(
   ({ camera, setLastUsedColor }: SelectionToolsProps) => {
@@ -27,6 +31,8 @@ export const SelectionTools = memo(
       [selection, setLastUsedColor]
     );
 
+    const deleteLayers = useDeleteLayers();
+
     if (!selectionBounds) {
       return null;
     }
@@ -42,6 +48,17 @@ export const SelectionTools = memo(
         }}
       >
         <ColorPicker onChange={setFill} />
+        <div className='flex items-center pl-2 ml-2 border-1 border-neutral-200'>
+          <Hint label='Delete'>
+            <Button
+              variant='board'
+              size='icon'
+              onClick={deleteLayers}
+            >
+              <Trash2 />
+            </Button>
+          </Hint>
+        </div>
       </div>
     );
   }
