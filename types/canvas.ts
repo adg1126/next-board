@@ -126,3 +126,7 @@ export interface RectangleProps {
   onPointerDown: (e: React.PointerEvent, id: string) => void;
   selectionColor?: string;
 }
+
+export interface SelectionBoxProps {
+  onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
+}
