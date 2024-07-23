@@ -1,5 +1,7 @@
-import { RectangleProps } from '@/types/canvas';
 import React from 'react';
+
+import { colorToCss } from '@/lib/utils';
+import { RectangleProps } from '@/types/canvas';
 
 export default function Rectangle({
   id,
@@ -19,8 +21,8 @@ export default function Rectangle({
       width={width}
       height={height}
       strokeWidth={1}
-      fill='#000'
-      stroke='transparent'
+      fill={fill ? colorToCss(fill) : '#000'}
+      stroke={selectionColor || 'transparent'}
     />
   );
 }
