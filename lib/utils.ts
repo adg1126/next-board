@@ -21,6 +21,29 @@ export const COLORS = [
   '#f43f5e',
 ];
 
+export const COLORS_FOR_COLOR_PICKER = [
+  { r: 239, g: 68, b: 68 },
+  { r: 249, g: 115, b: 22 },
+  { r: 245, g: 158, b: 11 },
+  { r: 234, g: 179, b: 8 },
+  { r: 132, g: 204, b: 22 },
+  { r: 34, g: 197, b: 94 },
+  { r: 20, g: 184, b: 166 },
+  { r: 6, g: 182, b: 212 },
+  { r: 14, g: 165, b: 233 },
+  { r: 59, g: 130, b: 246 },
+  { r: 99, g: 102, b: 241 },
+  { r: 139, g: 92, b: 246 },
+  { r: 168, g: 85, b: 247 },
+  { r: 217, g: 70, b: 239 },
+  { r: 236, g: 72, b: 153 },
+  { r: 244, g: 63, b: 94 },
+  { r: 0, g: 0, b: 0 },
+  { r: 178, g: 190, b: 191 },
+  { r: 255, g: 255, b: 255 },
+  { r: 255, g: 253, b: 208 },
+];
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

@@ -130,3 +130,17 @@ export interface RectangleProps {
 export interface SelectionBoxProps {
   onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }
+
+export interface SelectionToolsProps {
+  camera: Camera;
+  setLastUsedColor: (color: Color) => void;
+}
+
+export interface ColorPickerProps {
+  onChange: (color: Color) => void;
+}
+
+export interface ColorButtonProps {
+  onClick: (color: Color) => void;
+  color: Color;
+}

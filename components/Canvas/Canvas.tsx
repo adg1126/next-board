@@ -31,6 +31,7 @@ import Toolbar from './Toolbar';
 import { CursorsPresence } from './CursorsPresence';
 import { LayerPreview } from './LayerPreview';
 import { SelectionBox } from './SelectionBox';
+import { SelectionTools } from './SelectionTools';
 
 import { nanoid } from 'nanoid';
 import { LiveObject } from '@liveblocks/client';
@@ -279,6 +280,10 @@ export default function Canvas({ boardId }: CanvasProps) {
         canRedo={canRedo}
         undo={handleUndo}
         redo={handleRedo}
+      />
+      <SelectionTools
+        camera={camera}
+        setLastUsedColor={setLastUsedColor}
       />
       <svg
         className='h-[100vh] w-[100vw]'
