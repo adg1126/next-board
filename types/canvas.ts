@@ -134,6 +134,13 @@ export interface EllipseProps {
   selectionColor?: string;
 }
 
+export interface TextProps {
+  id: string;
+  layer: TextLayer;
+  onPointerDown: (e: React.PointerEvent, id: string) => void;
+  selectionColor?: string;
+}
+
 export interface SelectionBoxProps {
   onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }

@@ -8,6 +8,7 @@ import { useStorage } from '@liveblocks/react/suspense';
 
 import Rectangle from '../LayerComponents/Rectangle';
 import Ellipse from '../LayerComponents/Ellipse';
+import Text from '../LayerComponents/Text';
 
 export const LayerPreview = memo(
   ({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
@@ -30,6 +31,15 @@ export const LayerPreview = memo(
       case LayerType.Ellipse:
         return (
           <Ellipse
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColor={selectionColor}
+          />
+        );
+      case LayerType.Text:
+        return (
+          <Text
             id={id}
             layer={layer}
             onPointerDown={onLayerPointerDown}
