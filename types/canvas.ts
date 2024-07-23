@@ -148,6 +148,15 @@ export interface NoteProps {
   selectionColor?: string;
 }
 
+export interface PathProps {
+  x: number;
+  y: number;
+  points: number[][];
+  fill: string;
+  onPointerDown?: (e: React.PointerEvent) => void;
+  stroke?: string;
+}
+
 export interface SelectionBoxProps {
   onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }
