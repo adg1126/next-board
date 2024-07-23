@@ -127,13 +127,13 @@ export default function Toolbar({
       </div>
       <div className='bg-white rounded-md p-1.5 flex flex-col items-center shadow-md'>
         <ToolbarButton
-          label='Undo'
+          label='Undo (Ctrl + z)'
           icon={Undo2}
           onClick={undo}
           isDisabled={!canUndo}
         />
         <ToolbarButton
-          label='Redo'
+          label='Redo (Ctrl + x)'
           icon={Redo2}
           onClick={redo}
           isDisabled={!canRedo}

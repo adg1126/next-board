@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { CanvasProps } from '@/types';
 import {
@@ -10,6 +10,8 @@ import {
   Side,
   XYWH,
 } from '@/types/canvas';
+import { useDisableScrollBounce } from '@/hooks/use-disable-scroll-bounce';
+
 import {
   useHistory,
   useCanUndo,
@@ -40,6 +42,7 @@ import Path from '../LayerComponents/Path';
 
 import { nanoid } from 'nanoid';
 import { LiveObject } from '@liveblocks/client';
+import { useDeleteLayers } from '@/hooks/use-delete-layers';
 
 const MAX_LAYERS = 100;
 
@@ -66,7 +69,34 @@ export default function Canvas({ boardId }: CanvasProps) {
 
   const history = useHistory(),
     canUndo = useCanUndo(),
-    canRedo = useCanRedo();
+    canRedo = useCanRedo(),
+    deleteLayers = useDeleteLayers();
+  useDisableScrollBounce();
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      switch (e.key) {
+        case 'z':
+          if (e.ctrlKey || e.metaKey) {
+            history.undo();
+          }
+          break;
+        case 'x':
+          if (e.ctrlKey || e.metaKey) {
+            history.redo();
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [deleteLayers, history]);
 
   const handleUndo = () => {
     history.undo();
