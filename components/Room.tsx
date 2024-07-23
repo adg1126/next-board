@@ -6,8 +6,10 @@ import {
   RoomProvider,
   ClientSideSuspense,
 } from '@liveblocks/react/suspense';
+import { LiveList, LiveMap, LiveObject } from '@liveblocks/client';
 
 import { RoomProps } from '@/types';
+import { Layer } from '@/types/canvas';
 
 export default function Room({ children, roomId, fallback }: RoomProps) {
   return (
@@ -17,7 +19,11 @@ export default function Room({ children, roomId, fallback }: RoomProps) {
     >
       <RoomProvider
         id={roomId}
-        initialPresence={{ cursor: null }}
+        initialPresence={{ cursor: null, selection: [] }}
+        initialStorage={{
+          layers: new LiveMap<string, LiveObject<Layer>>(),
+          layerIds: new LiveList<string>([]),
+        }}
       >
         <ClientSideSuspense fallback={fallback}>{children}</ClientSideSuspense>
       </RoomProvider>

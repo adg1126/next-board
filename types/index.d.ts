@@ -119,3 +119,9 @@ declare interface ToolbarProps {
 declare interface CursorProps {
   connectionId: number;
 }
+
+declare interface LayerPreviewProps {
+  id: string;
+  onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
+  selectionColor?: string;
+}
