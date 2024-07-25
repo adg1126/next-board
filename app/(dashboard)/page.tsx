@@ -3,6 +3,8 @@ import BoardList from '@/components/BoardList';
 import EmptyOrg from '@/components/EmptyOrg';
 import { useOrganization } from '@clerk/nextjs';
 
+import { DashboardPageProps } from '@/types';
+
 export default function Dashboard({ searchParams }: DashboardPageProps) {
   const { organization } = useOrganization();
 
