@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 import { useOrganization, useOrganizationList } from '@clerk/nextjs';
 import Hint from '../Hint';
 
+import { OrginazationListItemProps } from '@/types';
+
 export default function OrganizationListItem({
   id,
   name,
