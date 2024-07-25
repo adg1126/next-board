@@ -19,15 +19,12 @@ import BoardDropdownMenu from '../BoardDropdownMenu';
 
 import { useBoardStore } from '@/zustand/boardStore';
 import { Menu } from 'lucide-react';
+import TabSeparator from '../TabSeparator';
 
 const font = Poppins({
   subsets: ['latin'],
   weight: ['600'],
 });
-
-const TabSeparator = () => {
-  return <div className='text-neutral-300 px-1.5'>|</div>;
-};
 
 export default function Info({ boardId }: InfoProps) {
   const { setModalOpen } = useBoardStore();
