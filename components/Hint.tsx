@@ -5,6 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/tooltip';
+import { TooltipProps } from '@/types';
 
 export default function Hint({
   label,
