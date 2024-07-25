@@ -9,7 +9,7 @@ export default function Dashboard({ searchParams }: DashboardPageProps) {
   const { organization } = useOrganization();
 
   return (
-    <main className='flex-1 h-[calc(100%-80px)]'>
+    <main className='w-full px-5 flex-1 h-[calc(100%-80px)]'>
       {!organization ? (
         <EmptyOrg />
       ) : (
