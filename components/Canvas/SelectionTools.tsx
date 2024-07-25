@@ -102,10 +102,7 @@ export const SelectionTools = memo(
               <BringToFront />
             </Button>
           </Hint>
-          <Hint
-            label='Send to back'
-            size='bottom'
-          >
+          <Hint label='Send to back'>
             <Button
               variant='board'
               size='icon'
