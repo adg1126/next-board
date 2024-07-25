@@ -7,13 +7,14 @@ import { useApiMutation } from '@/hooks/use-api-mutation';
 import { useQuery } from 'convex/react';
 import { cn } from '@/lib/utils';
 
-import { ClipboardX, Plus, SearchX, StarOff } from 'lucide-react';
+import { ClipboardX, Loader, Plus, SearchX, StarOff } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
 import BoardCard from './BoardCard';
 import { BoardListProps } from '@/types';
 
 import { useRouter } from 'next/navigation';
+import Room from './Room';
 
 const EmptySearch = () => {
   return (
@@ -170,17 +171,22 @@ export default function BoardList({ orgId, query }: BoardListProps) {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-5 mt-8 pb-10'>
         <NewBoardButton orgId={orgId} />
         {data?.map((board) => (
-          <BoardCard
+          <Room
             key={board._id}
-            id={board._id}
-            title={board.title}
-            imageUrl={board.imageUrl}
-            authorId={board.authorId}
-            authorName={board.authorName}
-            createdAt={board._creationTime}
-            orgId={board.orgId}
-            isFavorite={board.isFavorite}
-          />
+            roomId={board._id}
+            fallback={<BoardCard.Skeleton />}
+          >
+            <BoardCard
+              id={board._id}
+              title={board.title}
+              imageUrl={board.imageUrl}
+              authorId={board.authorId}
+              authorName={board.authorName}
+              createdAt={board._creationTime}
+              orgId={board.orgId}
+              isFavorite={board.isFavorite}
+            />
+          </Room>
         ))}
       </div>
     </div>
