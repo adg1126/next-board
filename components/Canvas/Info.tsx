@@ -73,6 +73,20 @@ export default function Info({ boardId }: InfoProps) {
       </Hint>
       <TabSeparator />
       <Hint
+        label='Go to dashboard'
+        side='bottom'
+        sideOffset={10}
+      >
+        <Button
+          asChild
+          variant='board'
+          className='text-base font-normal px-2'
+        >
+          <Link href='/dashboard'>Dashboard</Link>
+        </Button>
+      </Hint>
+      <TabSeparator />
+      <Hint
         label='Edit title'
         side='bottom'
         sideOffset={10}

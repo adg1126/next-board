@@ -3,12 +3,13 @@ import { Inter as FontSans } from 'next/font/google';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
-import { ConvexClientProvider } from '@/providers/convex-client-provider';
+import { ConvexWithClerkClientProvider } from '@/providers/convex-client-provider';
 
 import { Toaster } from '@/components/ui/sonner';
 import { ModalProvider } from '@/providers/modal-provider';
 import { Suspense } from 'react';
 import Loading from '@/components/Loading';
+import HomeNavbar from '@/components/Navbar/HomeNavbar';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -36,16 +37,17 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
+          'min-h-screen bg-background font-sans antialiased grainy',
           fontSans.variable
         )}
       >
         <Suspense fallback={<Loading />}>
-          <ConvexClientProvider>
+          <ConvexWithClerkClientProvider>
             <Toaster />
             <ModalProvider />
+            <HomeNavbar />
             {children}
-          </ConvexClientProvider>
+          </ConvexWithClerkClientProvider>
         </Suspense>
       </body>
     </html>

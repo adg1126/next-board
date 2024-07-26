@@ -6,6 +6,10 @@ declare interface ConvexClientProviderProps {
   children: React.ReactNode;
 }
 
+declare interface ConvexWithClerkClientProviderProps {
+  children: React.ReactNode;
+}
+
 declare interface OrginazationListItemProps {
   id: string;
   name: string;
@@ -124,4 +128,16 @@ declare interface LayerPreviewProps {
   id: string;
   onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
   selectionColor?: string;
+}
+
+declare interface VideoPlayerProps {
+  src: string;
+}
+
+declare interface VideoPlayerControlsProps {
+  progress: number;
+  isPaused: boolean;
+  onTogglePause: () => void;
+  width: number;
+  size: number;
 }

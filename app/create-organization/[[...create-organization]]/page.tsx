@@ -49,13 +49,30 @@ export default function CreateOrganizationPage() {
             </Button>
           </Hint>
           <TabSeparator />
+          <Hint
+            label='Go to dashboard'
+            side='bottom'
+            sideOffset={10}
+          >
+            <Button
+              asChild
+              variant='board'
+              className='text-base font-normal px-2'
+            >
+              <Link href='/dashboard'>Dashboard</Link>
+            </Button>
+          </Hint>
+          <TabSeparator />
           <div className='text-base font-normal px-2'>Create organization</div>
         </div>
         <div className='absolute top-2 right-2 bg-white rounded-md px-3 h-12 flex items-center shadow-md'>
           <UserButton />
         </div>
         <div className='w-full h-full flex items-center justify-center'>
-          <CreateOrganization path='/create-organization' />
+          <CreateOrganization
+            path='/create-organization'
+            afterCreateOrganizationUrl='/dashboard'
+          />
         </div>
       </main>
     </>
