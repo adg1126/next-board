@@ -1,7 +1,3 @@
-Here's a `README.md` file for your "next-board" project on GitHub:
-
----
-
 # Next-Board
 
 Next-Board is a collaborative drawing board application designed for companies
