@@ -5,6 +5,9 @@ to brainstorm and collaborate on ideas in real-time. Built with cutting-edge web
 technologies, Next-Board provides a seamless and interactive experience for
 users to create, edit, and share their work.
 
+## App Showcase
+https://github.com/user-attachments/assets/b2aa1e91-9959-4433-9258-69b1394e81cc
+
 ## Features
 
 - **Real-Time Collaboration**: Multiple users can draw and edit simultaneously
