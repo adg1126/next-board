@@ -133,7 +133,34 @@ export default function page() {
           </div>
         </div>
 
-        <ol className='mx-auto w-full my-8 pt-8 flex flex-col gap-y-16 items-center lg:gap-y-28'>
+        <ol className='mx-auto w-full my-8 pt-8 flex flex-col items-center gap-y-28'>
+          {GETTING_STARTED.map(({ title, steps, videoSrc }, i) => (
+            <li
+              className={`w-[90vw] flex flex-col-reverse gap-y-12 ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} lg:gap-x-14`}
+              key={i}
+            >
+              <div className='w-full flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 lg:w-[50%]'>
+                <span className='text-sm font-medium text-primary'>
+                  Step {i + 1}
+                </span>
+                <span className='text-xl font-semibold'>{title}</span>
+
+                {steps.map((step, i) => (
+                  <span
+                    className='mt-2 text-zinc-700'
+                    key={i}
+                  >
+                    {step}
+                  </span>
+                ))}
+              </div>
+              <div className='w-full rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 lg:w-[50%]'>
+                <VideoPlayer src={videoSrc} />
+              </div>
+            </li>
+          ))}
+        </ol>
+        {/* <ol className='mx-auto w-full my-8 pt-8 flex flex-col gap-y-16 items-center lg:gap-y-28'>
           {GETTING_STARTED.map(({ title, steps, videoSrc }, i) => (
             <li
               className={`w-[90vw] flex flex-col-reverse gap-y-8 lg:${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} lg:gap-x-20`}
@@ -160,7 +187,7 @@ export default function page() {
               </div>
             </li>
           ))}
-        </ol>
+        </ol> */}
       </section>
       <Footer />
     </div>
